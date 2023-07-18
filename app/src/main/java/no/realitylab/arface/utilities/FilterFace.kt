@@ -1,4 +1,4 @@
-package no.realitylab.arface
+package no.realitylab.arface.utilities
 
 import android.content.Context
 import android.os.Handler
@@ -9,6 +9,7 @@ import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.*
 import com.google.ar.sceneform.ux.AugmentedFaceNode
+import no.realitylab.arface.R
 
 class FilterFace(augmentedFace: AugmentedFace?,
                  val context: Context): AugmentedFaceNode(augmentedFace) {

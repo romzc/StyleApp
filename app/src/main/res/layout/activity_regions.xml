@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ar_activities.FaceRegionsActivity">
 
-    <fragment android:name="no.realitylab.arface.FaceArFragment"
+    <fragment android:name="no.realitylab.arface.utilities.FaceArFragment"
         android:id="@+id/face_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,4 +1,4 @@
-package no.realitylab.arface
+package no.realitylab.arface.utilities
 
 import android.os.Bundle
 import android.view.LayoutInflater

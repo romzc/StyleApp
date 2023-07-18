@@ -1,4 +1,4 @@
-package no.realitylab.arface
+package no.realitylab.arface.utilities
 
 import android.content.Context
 import android.widget.ImageView
@@ -9,6 +9,7 @@ import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.AugmentedFaceNode
+import no.realitylab.arface.R
 
 class CustomFaceNode(augmentedFace: AugmentedFace?,
                  val context: Context

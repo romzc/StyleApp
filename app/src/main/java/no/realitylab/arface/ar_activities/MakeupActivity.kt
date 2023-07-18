@@ -12,7 +12,7 @@ import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.Texture
 import com.google.ar.sceneform.ux.AugmentedFaceNode
 import kotlinx.android.synthetic.main.activity_makeup.*
-import no.realitylab.arface.FaceArFragment
+import no.realitylab.arface.utilities.FaceArFragment
 import no.realitylab.arface.R
 
 class MakeupActivity : AppCompatActivity() {

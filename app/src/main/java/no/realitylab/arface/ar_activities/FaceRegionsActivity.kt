@@ -10,8 +10,8 @@ import com.google.ar.core.AugmentedFace
 import com.google.ar.core.TrackingState
 import com.google.ar.sceneform.rendering.Renderable
 import kotlinx.android.synthetic.main.activity_regions.*
-import no.realitylab.arface.FaceArFragment
-import no.realitylab.arface.FilterFace
+import no.realitylab.arface.utilities.FaceArFragment
+import no.realitylab.arface.utilities.FilterFace
 import no.realitylab.arface.R
 
 
