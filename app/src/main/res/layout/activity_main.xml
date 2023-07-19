@@ -87,6 +87,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnGoogleSign"
             android:layout_width="match_parent"
             android:paddingHorizontal="15dp"
             android:layout_height="48dp"
