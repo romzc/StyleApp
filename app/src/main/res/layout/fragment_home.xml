@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorActivityBackground"
+    android:background="@color/colorPrimaryDark"
     tools:context=".fragments.home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -29,7 +29,6 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -49,28 +48,11 @@
         app:layout_constraintTop_toBottomOf="@id/llayoutPicture">
 
         <TextView
-            android:layout_height="wrap_content"
-            android:text="Estilo diario"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"/>
-        
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:text="Accesorios"
             android:textSize="22sp"
-            android:text="Casual"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:text="Oficina"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
