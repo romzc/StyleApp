@@ -42,26 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ar_activities.MakeupActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="locked"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
             android:name=".ar_activities.GlassesActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".ar_activities.FaceRegionsActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="locked"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".ar_activities.FaceLandmarksActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="locked"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+
     </application>
 
 </manifest>

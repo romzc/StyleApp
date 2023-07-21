@@ -8,21 +8,10 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import no.realitylab.arface.activities.HomeActivity
-import no.realitylab.arface.ar_activities.FaceLandmarksActivity
-import no.realitylab.arface.ar_activities.FaceRegionsActivity
-import no.realitylab.arface.ar_activities.GlassesActivity
-import no.realitylab.arface.ar_activities.MakeupActivity
 
 
 enum class ProviderType {

@@ -1,25 +1,15 @@
 package no.realitylab.arface.activities
 
-import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 //import kotlinx.android.synthetic.main.activity_home.bottomNavigationView
 //import kotlinx.android.synthetic.main.activity_home.fabRv
 import no.realitylab.arface.R
-import no.realitylab.arface.ar_activities.GlassesActivity
-import no.realitylab.arface.ar_activities.MakeupActivity
 import no.realitylab.arface.fragments.home.HomeFragment
 import no.realitylab.arface.fragments.home.ProfileFragment
 import no.realitylab.arface.models.UserData
