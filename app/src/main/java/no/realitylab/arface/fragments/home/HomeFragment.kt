@@ -21,6 +21,8 @@ class HomeFragment : Fragment() {
     private val userViewModel : UserViewModel by activityViewModels()
     private lateinit var profileImage: ImageView
     private lateinit var userName: TextView
+    private lateinit var userEmail: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() {
         val userObserver = Observer<UserData> {userData ->
             Picasso.get().load(userData.profilePictureUrl).into(profileImage)
             userName.text = userData.userName
+            userEmail.text = userData.userEmail
         }
         userViewModel.userData.observe(this, userObserver)
     }
@@ -40,6 +43,7 @@ class HomeFragment : Fragment() {
         val inflate = inflater.inflate(R.layout.fragment_home, container, false)
         profileImage = inflate.findViewById(R.id.image_view)
         userName = inflate.findViewById(R.id.tv_username)
+        userEmail = inflate.findViewById(R.id.tv_useremail)
         return inflate
     }
 
