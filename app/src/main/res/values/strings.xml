@@ -10,6 +10,8 @@
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    
+    <string name="prefs_file">ARCORE_FILE_KEY</string>
 
     <string name="webclient_id">844045995489-g8ocns8gbgncqere6of49qtdh7topih2.apps.googleusercontent.com</string>
 </resources>

@@ -109,7 +109,7 @@ class GlassesActivity : AppCompatActivity() {
         }
     }
 
-    fun checkIsSupportedDeviceOrFinish() : Boolean {
+    private fun checkIsSupportedDeviceOrFinish() : Boolean {
         if (ArCoreApk.getInstance().checkAvailability(this) == ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE) {
             Toast.makeText(this, "Augmented Faces requires ARCore", Toast.LENGTH_LONG).show()
             finish()

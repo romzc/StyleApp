@@ -111,6 +111,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_hair"
                     android:layout_width="210dp"
                     android:layout_height="280dp"
                     android:layout_margin="16dp"
@@ -146,6 +147,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_cap"
                     android:layout_width="210dp"
                     android:layout_height="280dp"
                     android:layout_margin="16dp"
@@ -181,6 +183,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_glasses"
                     android:layout_width="210dp"
                     android:layout_height="280dp"
                     android:layout_margin="16dp"

@@ -1,5 +1,6 @@
 package no.realitylab.arface.activities
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,18 +21,24 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import no.realitylab.arface.callbacks.ActivityCallback
+import no.realitylab.arface.fragments.home.ModelsListFragment
+import no.realitylab.arface.viewmodels.ItemViewModel
 
 
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : AppCompatActivity(),
+    NavigationView.OnNavigationItemSelectedListener,
+    ActivityCallback {
 
 
     private lateinit var fragContainer: FrameLayout
     private lateinit var currentUser : UserData
-
-    private val userVideModel : UserViewModel by viewModels()
-
     private lateinit var drawer : DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
+
+    private val userVideModel : UserViewModel by viewModels()
+    private val itemViewModel : ItemViewModel by viewModels()
     //val userViewModel: UserViewModel by viewModelFactory {  }
 
     //val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -53,11 +60,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         }
 
+        // guardar dotos
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.putString("userEmail", currentUser.userEmail)
+        prefs.putString("userName", currentUser.userName)
+        prefs.putString("userPhotoUri", currentUser.profilePictureUrl)
+        prefs.putString("userId", currentUser.userId)
+        prefs.apply()
+
+
         userVideModel.updateUserModel(currentUser)
-
-
         initUI()
-        initListeners()
     }
 
     private fun initUI() {
@@ -81,8 +94,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun initListeners() {
-
+    private fun pushBackFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(fragContainer.id, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -106,7 +122,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "Item settings", Toast.LENGTH_LONG).show()
             }
             R.id.nav_item_logout -> {
-                Toast.makeText(this, "Item logout", Toast.LENGTH_LONG).show()
+                // Borramos los datos guardados en el shared preferences
+                val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                prefs.clear()
+                prefs.apply()
+
+                // Retrocedemos en la pila de navegacion.
+                FirebaseAuth.getInstance().signOut()
+                onBackPressed()
             }
         }
 
@@ -130,5 +153,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onLaunchFragmentFromFragment(sender: String, msg: Int) {
+        if ( sender == HomeFragment.CHANGE_TO_MODELS ) {
+            val fragment = ModelsListFragment()
+            val bundle = Bundle()
+            bundle.putInt(ModelsListFragment.ARG_MODEL_ID, msg)
+            fragment.arguments = bundle
+            pushBackFragment(fragment)
+        }
     }
 }

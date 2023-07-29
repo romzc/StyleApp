@@ -24,6 +24,7 @@ class ProfileFragment : Fragment() {
     private lateinit var userNameCard: TextView
     private lateinit var userEmail: TextView
     private lateinit var userPhone: TextView
+    private lateinit var userEmailCard: TextView
 
     private val userViewModel : UserViewModel by activityViewModels()
 
@@ -35,6 +36,7 @@ class ProfileFragment : Fragment() {
             userName.text = userData.userName
             userNameCard.text = userData.userName
             userEmail.text = userData.userEmail
+            userEmailCard.text = userData.userEmail
             userPhone.text = "---"
         }
 
@@ -53,6 +55,7 @@ class ProfileFragment : Fragment() {
         userNameCard = inflate.findViewById(R.id.tv_profile_username_card)
         userEmail = inflate.findViewById(R.id.tv_profile_email)
         userPhone = inflate.findViewById(R.id.tv_profile_phone)
+        userEmailCard = inflate.findViewById(R.id.tv_profile_email_card)
         return inflate
     }
 
