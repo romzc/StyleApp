@@ -2,10 +2,13 @@ package no.realitylab.arface.activities
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 //import kotlinx.android.synthetic.main.activity_home.bottomNavigationView
@@ -16,8 +19,10 @@ import no.realitylab.arface.fragments.home.ProfileFragment
 import no.realitylab.arface.models.UserData
 import no.realitylab.arface.viewmodels.UserViewModel
 import androidx.activity.viewModels
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -76,7 +81,9 @@ class HomeActivity : AppCompatActivity(),
     private fun initUI() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
+        toolbar.setTitleTextColor(Color.BLACK)
         setSupportActionBar(toolbar)
+
 
         drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close)

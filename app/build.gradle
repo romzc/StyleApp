@@ -80,6 +80,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
+    // roundend images
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'

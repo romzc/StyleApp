@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         inflate = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -83,15 +83,23 @@ class HomeFragment : Fragment() {
     private fun initListeners() {
 
         glassesCardView.setOnClickListener {
-            callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 1)
+            //callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 1)
+
+            val intent = Intent(activity, GlassesActivity::class.java)
+            val arrayList = ArrayList<String>()
+            arrayList.add("lente_color.sfb")
+            arrayList.add("sunglasses.sfb")
+            arrayList.add("yellow_sunglasses.sfb")
+            intent.putStringArrayListExtra("models_list", arrayList)
+            startActivity(intent)
         }
 
         hairCardView.setOnClickListener {
-            callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 2)
+            //callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 2)
             //startActivity(Intent(activity, GlassesActivity::class.java))
         }
         capCardView.setOnClickListener {
-            callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 3)
+            //callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 3)
         }
     }
 

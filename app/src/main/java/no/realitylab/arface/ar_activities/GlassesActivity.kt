@@ -34,6 +34,8 @@ class GlassesActivity : AppCompatActivity() {
     private var index: Int = 0
     private var changeModel: Boolean = false
 
+    private lateinit var listOfStrings: ArrayList<String>
+
 
     /*
     * Declaracion de los elementos necesarios para la interfaz
@@ -47,17 +49,18 @@ class GlassesActivity : AppCompatActivity() {
         if (!checkIsSupportedDeviceOrFinish()) {
             return
         }
-
         setContentView(R.layout.activity_glasses)
+
+        listOfStrings = intent.getStringArrayListExtra("models_list") as ArrayList<String>
+        arFragment = face_fragment as FaceArFragment
 
         initUI()
         initListeners()
 
-        arFragment = face_fragment as FaceArFragment
-            
-
-        buildModel("yellow_sunglasses.sfb")
-        buildModel("sunglasses.sfb")
+        // load models
+        for ( i in listOfStrings ) {
+            buildModel(i)
+        }
 
         val sceneView = arFragment.arSceneView
         sceneView.cameraStreamRenderPriority = Renderable.RENDER_PRIORITY_FIRST

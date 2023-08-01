@@ -20,9 +20,7 @@ import org.w3c.dom.Text
 class ProfileFragment : Fragment() {
 
     private lateinit var userImage: ImageView
-    private lateinit var userName: TextView
     private lateinit var userNameCard: TextView
-    private lateinit var userEmail: TextView
     private lateinit var userPhone: TextView
     private lateinit var userEmailCard: TextView
 
@@ -33,9 +31,7 @@ class ProfileFragment : Fragment() {
 
         val userObserver = Observer<UserData> { userData ->
             Picasso.get().load(userData.profilePictureUrl).into(userImage)
-            userName.text = userData.userName
             userNameCard.text = userData.userName
-            userEmail.text = userData.userEmail
             userEmailCard.text = userData.userEmail
             userPhone.text = "---"
         }
@@ -51,9 +47,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val inflate = inflater.inflate(R.layout.fragment_profile, container, false)
         userImage = inflate.findViewById(R.id.iv_profile_photo)
-        userName = inflate.findViewById(R.id.tv_profile_username)
         userNameCard = inflate.findViewById(R.id.tv_profile_username_card)
-        userEmail = inflate.findViewById(R.id.tv_profile_email)
         userPhone = inflate.findViewById(R.id.tv_profile_phone)
         userEmailCard = inflate.findViewById(R.id.tv_profile_email_card)
         return inflate
