@@ -3,6 +3,9 @@ package no.realitylab.arface.fragments.main
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +15,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,14 +29,18 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import no.realitylab.arface.R
 import no.realitylab.arface.REQUEST_CODE_SIGN_IN
 import no.realitylab.arface.activities.HomeActivity
 import no.realitylab.arface.callbacks.ActivityCallback
+import java.io.ByteArrayOutputStream
 
 
 class LoginFragment : Fragment() {
@@ -148,18 +159,81 @@ class LoginFragment : Fragment() {
 
         auth.signInWithCredential(credentials).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
+
                 val user = auth.currentUser
-                showHomeActivity(
-                    userId = user?.uid ?: "",
-                    userName = user?.displayName ?: "",
-                    userPhoto = user?.photoUrl.toString(),
-                    userEmail = user?.email.toString()
-                )
+                val userId = user?.uid
+                val userName = user?.displayName ?: ""
+                val userEmail = user?.email ?: ""
+                val userPhoto = user?.photoUrl
+
+                if (userId != null) {
+                    val userRef = fireDatabase.child("users").child(userId)
+                    userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                val userNameSnap = snapshot.child("userName").getValue(String::class.java) ?: ""
+                                val userEmailSnap = snapshot.child("userEmail").getValue(String::class.java) ?: ""
+                                val userPhotoUriSnap = snapshot.child("userPhotoUri").getValue(String::class.java) ?: ""
+                                showHomeActivity(userId, userNameSnap, userPhotoUriSnap, userEmailSnap)
+                            }
+                            else {
+                                downloadAndSaveUserImage(userPhoto, userRef, userId, userName, userEmail)
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            showAlert()
+                        }
+                    })
+                }
             }
             else {
                 showAlert()
             }
         }
+    }
+
+    private fun downloadAndSaveUserImage(
+        userPhoto: Uri?,
+        userRef: DatabaseReference,
+        userId: String,
+        userName: String,
+        userEmail: String
+    ) {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val imageRef = storageRef.child("user_photo/$userId.jpg")
+
+        Glide.with(this@LoginFragment)
+            .asBitmap()
+            .load(userPhoto)
+            .into(object : CustomTarget<Bitmap>(){
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    val baos = ByteArrayOutputStream()
+                    resource.compress(Bitmap.CompressFormat.JPEG,80, baos)
+                    val data = baos.toByteArray()
+                    val urlTask = imageRef.putBytes(data)
+                    urlTask.addOnSuccessListener { task ->
+                        imageRef.downloadUrl.addOnSuccessListener { uri ->
+                            val downloadUri = uri.toString()
+                            val userMap = HashMap<String, String>()
+                            userMap["userName"] = userName
+                            userMap["userEmail"] = userEmail
+                            userMap["userPhotoUri"] = downloadUri
+
+                            userRef.setValue(userMap).addOnCompleteListener { saveTask ->
+                                if (saveTask.isSuccessful) {
+                                    showHomeActivity(userId, userName, downloadUri, userEmail)
+                                } else {
+                                    showAlert()
+                                }
+                            }
+                        }
+                    }
+                }
+
+                override fun onLoadCleared(p0: Drawable?) {
+                    showAlert()
+                }
+            })
     }
 
     private fun showAlert() {
@@ -208,4 +282,6 @@ class LoginFragment : Fragment() {
                 arguments = Bundle()
             }
     }
+
+
 }

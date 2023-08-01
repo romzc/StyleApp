@@ -70,7 +70,6 @@ class SignupFragment : Fragment() {
 
     private fun initListeners() {
         btnBack.setOnClickListener { requireActivity().onBackPressed() }
-
         btnRegister.setOnClickListener {
             if (tvUserName.text.isNotEmpty() &&
                 tvEmail.text.isNotEmpty() &&
@@ -91,7 +90,6 @@ class SignupFragment : Fragment() {
     }
 
     private fun registerUser(email: String, password: String, name: String) {
-
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
 
             val userId = auth.currentUser?.uid
@@ -148,7 +146,6 @@ class SignupFragment : Fragment() {
                 Toast.makeText(requireContext(), "problemas al registrar usuario", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun initUI() {

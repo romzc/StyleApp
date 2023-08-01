@@ -4,6 +4,8 @@ import android.app.ActivityManager
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.core.ArCoreApk
@@ -24,14 +26,21 @@ class GlassesActivity : AppCompatActivity() {
         const val MIN_OPENGL_VERSION = 3.0
     }
 
-    lateinit var arFragment: FaceArFragment
-    private var faceMeshTexture: Texture? = null
+    private lateinit var arFragment: FaceArFragment
     private var glasses: ArrayList<ModelRenderable> = ArrayList()
     private var faceRegionsRenderable: ModelRenderable? = null
 
-    var faceNodeMap = HashMap<AugmentedFace, AugmentedFaceNode>()
+    private var faceNodeMap = HashMap<AugmentedFace, AugmentedFaceNode>()
     private var index: Int = 0
     private var changeModel: Boolean = false
+
+
+    /*
+    * Declaracion de los elementos necesarios para la interfaz
+    * de lentes.
+    *
+     */
+    private lateinit var nextButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,39 +49,15 @@ class GlassesActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_glasses)
-        button_next.setOnClickListener {
-            changeModel = !changeModel
-            index++
-            if (index > glasses.size - 1) {
-                index = 0
-            }
-            faceRegionsRenderable = glasses.get(index)
-        }
+
+        initUI()
+        initListeners()
 
         arFragment = face_fragment as FaceArFragment
-        Texture.builder()
-            .setSource(this, R.drawable.makeup)
-            .build()
-            .thenAccept { texture -> faceMeshTexture = texture }
+            
 
-        ModelRenderable.builder()
-            .setSource(this, Uri.parse("yellow_sunglasses.sfb"))
-            .build()
-            .thenAccept { modelRenderable ->
-                glasses.add(modelRenderable)
-                faceRegionsRenderable = modelRenderable
-                modelRenderable.isShadowCaster = false
-                modelRenderable.isShadowReceiver = false
-            }
-
-        ModelRenderable.builder()
-            .setSource(this, Uri.parse("sunglasses.sfb"))
-            .build()
-            .thenAccept { modelRenderable ->
-                glasses.add(modelRenderable)
-                modelRenderable.isShadowCaster = false
-                modelRenderable.isShadowReceiver = false
-            }
+        buildModel("yellow_sunglasses.sfb")
+        buildModel("sunglasses.sfb")
 
         val sceneView = arFragment.arSceneView
         sceneView.cameraStreamRenderPriority = Renderable.RENDER_PRIORITY_FIRST
@@ -87,7 +72,7 @@ class GlassesActivity : AppCompatActivity() {
                                 val faceNode = AugmentedFaceNode(f)
                                 faceNode.setParent(scene)
                                 faceNode.faceRegionsRenderable = faceRegionsRenderable
-                                faceNodeMap.put(f, faceNode)
+                                faceNodeMap[f] = faceNode
                             } else if (changeModel) {
                                 faceNodeMap.getValue(f).faceRegionsRenderable = faceRegionsRenderable
                             }
@@ -106,6 +91,33 @@ class GlassesActivity : AppCompatActivity() {
                         }
                     }
             }
+        }
+    }
+
+    private fun buildModel(uriString: String) {
+        ModelRenderable.builder()
+            .setSource(this, Uri.parse(uriString))
+            .build()
+            .thenAccept { modelRenderable ->
+                glasses.add(modelRenderable)
+                faceRegionsRenderable = modelRenderable
+                modelRenderable.isShadowCaster = false
+                modelRenderable.isShadowReceiver = false
+            }
+    }
+
+    private fun initUI() {
+        nextButton = findViewById(R.id.button_next)
+    }
+
+    private fun initListeners() {
+        nextButton.setOnClickListener {
+            changeModel = !changeModel
+            index++
+            if (index > glasses.size - 1) {
+                index = 0
+            }
+            faceRegionsRenderable = glasses[index]
         }
     }
 
