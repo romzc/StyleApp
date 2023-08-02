@@ -37,7 +37,9 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val userObserver = Observer<UserData> {userData ->
+            Log.d("APP","------> ${userData.profilePictureUrl}")
             Picasso.get().load(userData.profilePictureUrl).into(profileImage)
             userName.text = userData.userName
             userEmail.text = userData.userEmail
@@ -90,6 +92,10 @@ class HomeFragment : Fragment() {
             arrayList.add("lente_color.sfb")
             arrayList.add("sunglasses.sfb")
             arrayList.add("yellow_sunglasses.sfb")
+            arrayList.add("glass1.sfb")
+            arrayList.add("glass2.sfb")
+            arrayList.add("sunglass1.sfb")
+            arrayList.add("sunglass2.sfb")
             intent.putStringArrayListExtra("models_list", arrayList)
             startActivity(intent)
         }

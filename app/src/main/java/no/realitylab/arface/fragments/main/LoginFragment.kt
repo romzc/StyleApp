@@ -37,12 +37,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import no.realitylab.arface.R
-import no.realitylab.arface.REQUEST_CODE_SIGN_IN
 import no.realitylab.arface.activities.HomeActivity
 import no.realitylab.arface.callbacks.ActivityCallback
+import no.realitylab.arface.models.UserData
 import java.io.ByteArrayOutputStream
 
-
+const val REQUEST_CODE_SIGN_IN = 0
 class LoginFragment : Fragment() {
 
     private lateinit var inflate: View
@@ -116,7 +116,7 @@ class LoginFragment : Fragment() {
                                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                                         val userName = dataSnapshot.child("userName").getValue(String::class.java)
                                         val userEmail = dataSnapshot.child("userEmail").getValue(String::class.java)
-                                        val userPhotoUri = dataSnapshot.child("userPhotoUri").getValue(String::class.java)
+                                        val userPhotoUri = dataSnapshot.child("profilePictureUrl").getValue(String::class.java)
 
                                         tvEmail.text = ""
                                         tvPassword.text = ""
@@ -159,7 +159,6 @@ class LoginFragment : Fragment() {
 
         auth.signInWithCredential(credentials).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-
                 val user = auth.currentUser
                 val userId = user?.uid
                 val userName = user?.displayName ?: ""
@@ -173,7 +172,7 @@ class LoginFragment : Fragment() {
                             if (snapshot.exists()) {
                                 val userNameSnap = snapshot.child("userName").getValue(String::class.java) ?: ""
                                 val userEmailSnap = snapshot.child("userEmail").getValue(String::class.java) ?: ""
-                                val userPhotoUriSnap = snapshot.child("userPhotoUri").getValue(String::class.java) ?: ""
+                                val userPhotoUriSnap = snapshot.child("profilePictureUrl").getValue(String::class.java) ?: ""
                                 showHomeActivity(userId, userNameSnap, userPhotoUriSnap, userEmailSnap)
                             }
                             else {
@@ -217,7 +216,7 @@ class LoginFragment : Fragment() {
                             val userMap = HashMap<String, String>()
                             userMap["userName"] = userName
                             userMap["userEmail"] = userEmail
-                            userMap["userPhotoUri"] = downloadUri
+                            userMap["profilePictureUrl"] = downloadUri
 
                             userRef.setValue(userMap).addOnCompleteListener { saveTask ->
                                 if (saveTask.isSuccessful) {
@@ -266,7 +265,7 @@ class LoginFragment : Fragment() {
         val intent = Intent(activity, HomeActivity::class.java).apply {
             putExtra("userId", userId)
             putExtra("userName",userName)
-            putExtra("userPhotoUri", userPhoto)
+            putExtra("profilePictureUrl", userPhoto)
             putExtra("userEmail",userEmail)
         }
         startActivity(intent)

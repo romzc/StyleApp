@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     private lateinit var fragContainer: FrameLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
         initUI()
         session()
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         val email = prefs.getString("userEmail", null)
         val username = prefs.getString("userName", null)
         val userid = prefs.getString("userId", null)
-        val userPhotoUri = prefs.getString("userPhotoUri", null)
+        val userPhotoUri = prefs.getString("profilePictureUrl", null)
 
         if (email != null && userPhotoUri != null && username != null && userid != null) {
             mainLayout.visibility = View.INVISIBLE
@@ -73,10 +72,11 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         val intent = Intent(this, HomeActivity::class.java).apply {
             putExtra("userId", userId)
             putExtra("userName",userName)
-            putExtra("userPhotoUri", userPhoto)
+            putExtra("profilePictureUrl", userPhoto)
             putExtra("userEmail",userEmail)
         }
         startActivity(intent)
+        finish()
     }
 
     private fun pushBackFragment(fragment: Fragment) {

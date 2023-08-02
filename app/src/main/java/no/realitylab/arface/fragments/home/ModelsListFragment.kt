@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import no.realitylab.arface.R
 import no.realitylab.arface.adapter.ItemAdapter
 import no.realitylab.arface.providers.ItemProvider
@@ -42,9 +43,8 @@ class ModelsListFragment : Fragment() {
 
     private fun initRecyclerView(){
         recyclerView = inflate.findViewById(R.id.recycler_models)
-        adapter = ItemAdapter(ItemProvider.itemModelsList)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = ItemAdapter(itemViewModel.models.value ?: emptyList() )
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = adapter
     }
 

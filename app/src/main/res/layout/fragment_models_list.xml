@@ -6,25 +6,10 @@
     android:background="@color/colorActivityBackground"
     tools:context=".fragments.home.ModelsListFragment">
 
-
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_models"
+        android:background="@color/colorActivityBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Modelos" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_models"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

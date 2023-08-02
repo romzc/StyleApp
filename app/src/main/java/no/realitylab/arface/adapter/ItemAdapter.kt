@@ -26,10 +26,12 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(modelsList[position])
+        /*
         holder.itemView.setOnClickListener {
             //changeToRV(position)
             val intent = Intent(it.context, GlassesActivity::class.java)
             it.context.startActivity(intent)
         }
+        */
     }
 }
