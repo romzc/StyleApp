@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         val userid = prefs.getString("userId", null)
         val userPhotoUri = prefs.getString("profilePictureUrl", null)
 
-        if (email != null && userPhotoUri != null && username != null && userid != null) {
+        if (!email.isNullOrEmpty() && !userPhotoUri.isNullOrEmpty() && !username.isNullOrEmpty() && !userid.isNullOrEmpty()) {
             mainLayout.visibility = View.INVISIBLE
             showHomeActivity(
                 userEmail = email,

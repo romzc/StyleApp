@@ -1,5 +1,6 @@
 package no.realitylab.arface.fragments.main
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -30,12 +31,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
+
 import no.realitylab.arface.R
 import no.realitylab.arface.activities.HomeActivity
 import no.realitylab.arface.callbacks.ActivityCallback
@@ -106,17 +102,19 @@ class LoginFragment : Fragment() {
             val password = tvPassword.text
             if ( email.isNotEmpty() && password.isNotEmpty() ) {
                 auth.signInWithEmailAndPassword(email.toString(), password.toString())
-                    .addOnCompleteListener {task ->
+                    .addOnCompleteListener { task ->
                         if ( task.isSuccessful ) {
                             val currentUser = auth.currentUser
                             val userId = currentUser?.uid
                             if (userId != null ) {
                                 val userRef = fireDatabase.child("users").child(userId)
                                 userRef.addValueEventListener (object : ValueEventListener {
-                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    override fun onDataChange( dataSnapshot: DataSnapshot ) {
                                         val userName = dataSnapshot.child("userName").getValue(String::class.java)
                                         val userEmail = dataSnapshot.child("userEmail").getValue(String::class.java)
                                         val userPhotoUri = dataSnapshot.child("profilePictureUrl").getValue(String::class.java)
+
+                                        Log.d("APP", "userphoto $userPhotoUri, $userName, $userEmail")
 
                                         tvEmail.text = ""
                                         tvPassword.text = ""
@@ -136,6 +134,9 @@ class LoginFragment : Fragment() {
                             }
                         }
                     }
+            }
+            else {
+                Toast.makeText(requireContext(), "Complete los campos", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -180,13 +181,13 @@ class LoginFragment : Fragment() {
                             }
                         }
                         override fun onCancelled(error: DatabaseError) {
-                            showAlert()
+                            showAlert("Se ha cancelado el proceso de registro")
                         }
                     })
                 }
             }
             else {
-                showAlert()
+                showAlert("Se ha producido un error en el proceso de autenticación")
             }
         }
     }
@@ -222,7 +223,7 @@ class LoginFragment : Fragment() {
                                 if (saveTask.isSuccessful) {
                                     showHomeActivity(userId, userName, downloadUri, userEmail)
                                 } else {
-                                    showAlert()
+                                    showAlert("Error al registrar al usuario")
                                 }
                             }
                         }
@@ -230,15 +231,15 @@ class LoginFragment : Fragment() {
                 }
 
                 override fun onLoadCleared(p0: Drawable?) {
-                    showAlert()
+                    showAlert("Se limpio los datos")
                 }
             })
     }
 
-    private fun showAlert() {
+    private fun showAlert(text: String) {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error atenticando al usuario")
+        builder.setMessage(text)
         builder.setPositiveButton("Aceptar", null)
         val dialog = builder.create()
         dialog.show()
@@ -247,7 +248,7 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if ( requestCode == REQUEST_CODE_SIGN_IN ) {
-            if ( data != null ) {
+            if ( data != null && resultCode == Activity.RESULT_OK) {
                 try {
                     val account = GoogleSignIn.getSignedInAccountFromIntent(data).result
                     account?.let {
@@ -255,7 +256,7 @@ class LoginFragment : Fragment() {
                     }
                 }
                 catch (e: Exception) {
-                    showAlert()
+                    showAlert("Excepción esperando el registro")
                 }
             }
         }

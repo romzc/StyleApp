@@ -123,7 +123,7 @@ class SignupFragment : Fragment() {
                             val map = HashMap<String, String>()
                             map["userName"] = name
                             map["userEmail"] = email
-                            map["userPhotoUri"] = downloadUri
+                            map["profilePictureUrl"] = downloadUri
 
                             if (userId != null) {
                                 fireDatabase.child(userId).setValue(map).addOnCompleteListener { task ->
@@ -131,7 +131,7 @@ class SignupFragment : Fragment() {
                                         val intent = Intent(requireContext(), HomeActivity::class.java).apply {
                                             putExtra("userId", userId)
                                             putExtra("userName", name)
-                                            putExtra("userPhotoUri", downloadUri)
+                                            putExtra("profilePictureUrl", downloadUri)
                                             putExtra("userEmail",email)
                                         }
                                         startActivity(intent)

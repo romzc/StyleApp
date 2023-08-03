@@ -33,31 +33,20 @@ class HomeFragment : Fragment() {
     private lateinit var hairCardView: CardView
     private lateinit var inflate: View
 
+    private lateinit var userId: String
     private lateinit var callback: ActivityCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val userObserver = Observer<UserData> {userData ->
-            Log.d("APP","------> ${userData.profilePictureUrl}")
+            userId = userData.userId?: ""
             Picasso.get().load(userData.profilePictureUrl).into(profileImage)
             userName.text = userData.userName
             userEmail.text = userData.userEmail
         }
         userViewModel.userData.observe(this, userObserver)
     }
-
-
-    override fun onResume() {
-        super.onResume()
-        val userObserver = Observer<UserData> {userData ->
-            Picasso.get().load(userData.profilePictureUrl).into(profileImage)
-            userName.text = userData.userName
-            userEmail.text = userData.userEmail
-        }
-        userViewModel.userData.observe(this, userObserver)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +54,6 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         inflate = inflater.inflate(R.layout.fragment_home, container, false)
-
         initUI()
         initListeners()
 
@@ -96,16 +84,34 @@ class HomeFragment : Fragment() {
             arrayList.add("glass2.sfb")
             arrayList.add("sunglass1.sfb")
             arrayList.add("sunglass2.sfb")
+            arrayList.add("sunglass.sfb")
             intent.putStringArrayListExtra("models_list", arrayList)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
 
         hairCardView.setOnClickListener {
-            //callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 2)
-            //startActivity(Intent(activity, GlassesActivity::class.java))
+            val intent = Intent(activity, GlassesActivity::class.java)
+            val arrayList = ArrayList<String>()
+            arrayList.add("hair1.sfb")
+            arrayList.add("hair2.sfb")
+            arrayList.add("hair3.sfb")
+            arrayList.add("hair4.sfb")
+            arrayList.add("hair5.sfb")
+            intent.putStringArrayListExtra("models_list", arrayList)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
         capCardView.setOnClickListener {
-            //callback.onLaunchFragmentFromFragment(CHANGE_TO_MODELS, 3)
+            val intent = Intent(activity, GlassesActivity::class.java)
+            val arrayList = ArrayList<String>()
+            arrayList.add("cap1.sfb")
+            arrayList.add("cap2.sfb")
+            arrayList.add("cap3.sfb")
+            arrayList.add("cap4.sfb")
+            intent.putStringArrayListExtra("models_list", arrayList)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
     }
 

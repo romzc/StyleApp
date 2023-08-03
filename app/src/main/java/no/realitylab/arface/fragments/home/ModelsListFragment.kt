@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import no.realitylab.arface.R
 import no.realitylab.arface.adapter.ItemAdapter
+import no.realitylab.arface.models.Photo
 import no.realitylab.arface.providers.ItemProvider
 import no.realitylab.arface.viewmodels.ItemViewModel
 import no.realitylab.arface.viewmodels.UserViewModel
@@ -23,6 +26,7 @@ class ModelsListFragment : Fragment() {
     private lateinit var inflate: View
     private lateinit var adapter: ItemAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,17 +40,32 @@ class ModelsListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         inflate = inflater.inflate(R.layout.fragment_models_list, container, false)
+        progressBar = inflate.findViewById(R.id.progressBarList)
+        itemViewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
+        itemViewModel.getPhotosFromFirebase() // Obtener las fotos desde Firebase
         initRecyclerView()
-
         return inflate
     }
 
+
     private fun initRecyclerView(){
         recyclerView = inflate.findViewById(R.id.recycler_models)
-        adapter = ItemAdapter(itemViewModel.models.value ?: emptyList() )
+        adapter = ItemAdapter(emptyList())
         recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = adapter
+        itemViewModel.models.observe(viewLifecycleOwner, Observer { photoList ->
+            adapter.updateData(photoList)
+        })
+
+
     }
+
 
     companion object {
 

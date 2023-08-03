@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.image_view
 import no.realitylab.arface.R
@@ -29,6 +31,11 @@ class ProfileFragment : Fragment() {
 
     private lateinit var logoutText: TextView
     private val userViewModel : UserViewModel by activityViewModels()
+    private lateinit var userId: String
+
+    private lateinit var fireDatabase: DatabaseReference
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,7 @@ class ProfileFragment : Fragment() {
             userNameCard.text = userData.userName
             userEmailCard.text = userData.userEmail
             userPhone.text = "---"
+            userId = userData.userId ?: ""
         }
 
         userViewModel.userData.observe(this, userObserver)
@@ -50,9 +58,15 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         inflate = inflater.inflate(R.layout.fragment_profile, container, false)
-
         initUI()
+        initServices()
         return inflate
+    }
+
+    private fun initServices() {
+        fireDatabase = FirebaseDatabase
+            .getInstance("https://styleapp-50e33-default-rtdb.firebaseio.com/")
+            .reference
     }
 
     private fun initUI() {

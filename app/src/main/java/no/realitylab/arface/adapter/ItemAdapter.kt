@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import no.realitylab.arface.R
 import no.realitylab.arface.ar_activities.GlassesActivity
 import no.realitylab.arface.models.ItemModel
+import no.realitylab.arface.models.Photo
 
 class ItemAdapter(
-    private var modelsList : List<ItemModel> = emptyList()
+    private var modelsList : List<Photo> = emptyList()
     //private val changeToRV: (Int) -> Unit
 ) : RecyclerView.Adapter<ItemViewHolder>() {
 
+
+    fun updateData(newItemList: List<Photo>) {
+        modelsList = newItemList
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)

@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -47,7 +48,6 @@ class HomeActivity : AppCompatActivity(),
     private lateinit var bottomNavigationView: BottomNavigationView
 
     private val userVideModel : UserViewModel by viewModels()
-    private val itemViewModel : ItemViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,8 +76,9 @@ class HomeActivity : AppCompatActivity(),
         prefs.apply()
 
 
+        Log.d("APP", "-- ${currentUser.profilePictureUrl}")
+
         userVideModel.updateUserModel(currentUser)
-        itemViewModel.updateModels(ItemProvider.itemModelsList.listOfItems)
 
         initUI()
     }

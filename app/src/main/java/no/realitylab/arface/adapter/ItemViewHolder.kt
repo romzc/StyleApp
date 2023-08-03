@@ -6,12 +6,13 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
 import no.realitylab.arface.R
 import no.realitylab.arface.models.ItemModel
+import no.realitylab.arface.models.Photo
 
 class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val userPhoto = view.findViewById<RoundedImageView>(R.id.photo_post)
 
-    fun bind(itemModel: ItemModel) {
-        Picasso.get().load(itemModel.itemPhoto).into(userPhoto)
+    fun bind(photo: Photo) {
+        Picasso.get().load(photo.photoUrl).into(userPhoto)
     }
 }
