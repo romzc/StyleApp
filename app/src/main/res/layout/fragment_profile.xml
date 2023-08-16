@@ -7,7 +7,7 @@
     android:paddingHorizontal="20dp"
     android:paddingTop="20dp"
     android:background="@color/colorActivityBackground"
-    tools:context=".fragments.home.ProfileFragment">
+    tools:context=".presentation.fragments.home.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

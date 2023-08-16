@@ -1,22 +1,15 @@
-package no.realitylab.arface.ar_activities
+package no.realitylab.arface.presentation.activities
 
 import android.app.ActivityManager
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.provider.MediaStore
-import android.util.Log
 import android.view.PixelCopy
 import android.view.SurfaceView
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +19,6 @@ import com.google.ar.core.TrackingState
 import com.google.ar.sceneform.ArSceneView
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
-import com.google.ar.sceneform.rendering.Texture
 import com.google.ar.sceneform.ux.AugmentedFaceNode
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -37,7 +29,6 @@ import kotlinx.android.synthetic.main.activity_glasses.*
 import no.realitylab.arface.utilities.FaceArFragment
 import no.realitylab.arface.R
 import java.io.ByteArrayOutputStream
-import java.nio.ByteBuffer
 import java.util.ArrayList
 
 class GlassesActivity : AppCompatActivity() {

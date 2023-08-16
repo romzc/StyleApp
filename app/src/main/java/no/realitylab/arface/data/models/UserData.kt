@@ -1,4 +1,4 @@
-package no.realitylab.arface.models
+package no.realitylab.arface.data.models
 
 data class UserData(
     val userId: String?,

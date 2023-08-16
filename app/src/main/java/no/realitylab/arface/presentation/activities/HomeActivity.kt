@@ -1,42 +1,22 @@
-package no.realitylab.arface.activities
+package no.realitylab.arface.presentation.activities
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 //import kotlinx.android.synthetic.main.activity_home.bottomNavigationView
 //import kotlinx.android.synthetic.main.activity_home.fabRv
 import no.realitylab.arface.R
-import no.realitylab.arface.fragments.home.HomeFragment
-import no.realitylab.arface.fragments.home.ProfileFragment
-import no.realitylab.arface.models.UserData
-import no.realitylab.arface.viewmodels.UserViewModel
+import no.realitylab.arface.presentation.fragments.home.HomeFragment
+import no.realitylab.arface.presentation.fragments.home.ProfileFragment
+import no.realitylab.arface.data.models.UserData
+import no.realitylab.arface.presentation.viewmodels.UserViewModel
 import androidx.activity.viewModels
-import androidx.annotation.ColorInt
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
-import no.realitylab.arface.MainActivity
-import no.realitylab.arface.callbacks.ActivityCallback
-import no.realitylab.arface.fragments.home.ModelsListFragment
-import no.realitylab.arface.models.ItemModelResponse
-import no.realitylab.arface.providers.ItemProvider
-import no.realitylab.arface.viewmodels.ItemViewModel
+import no.realitylab.arface.utilities.callbacks.ActivityCallback
+import no.realitylab.arface.presentation.fragments.home.ModelsListFragment
 
 
 class HomeActivity : AppCompatActivity(),

@@ -1,4 +1,4 @@
-package no.realitylab.arface.fragments.home
+package no.realitylab.arface.presentation.fragments.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import no.realitylab.arface.R
-import no.realitylab.arface.adapter.ItemAdapter
-import no.realitylab.arface.models.Photo
-import no.realitylab.arface.providers.ItemProvider
-import no.realitylab.arface.viewmodels.ItemViewModel
-import no.realitylab.arface.viewmodels.UserViewModel
+import no.realitylab.arface.presentation.adapter.ItemAdapter
+import no.realitylab.arface.presentation.viewmodels.ItemViewModel
 
 
 class ModelsListFragment : Fragment() {

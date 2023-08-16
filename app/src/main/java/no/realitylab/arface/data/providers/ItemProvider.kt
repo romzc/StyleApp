@@ -1,7 +1,7 @@
-package no.realitylab.arface.providers
+package no.realitylab.arface.data.providers
 
-import no.realitylab.arface.models.ItemModel
-import no.realitylab.arface.models.ItemModelResponse
+import no.realitylab.arface.data.models.ItemModel
+import no.realitylab.arface.data.models.ItemModelResponse
 
 class ItemProvider {
     companion object {

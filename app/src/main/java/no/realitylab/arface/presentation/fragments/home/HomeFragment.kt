@@ -1,4 +1,4 @@
-package no.realitylab.arface.fragments.home
+package no.realitylab.arface.presentation.fragments.home
 
 import android.content.Context
 import android.content.Intent
@@ -14,12 +14,11 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_home.image_view
 import no.realitylab.arface.R
-import no.realitylab.arface.ar_activities.GlassesActivity
-import no.realitylab.arface.callbacks.ActivityCallback
-import no.realitylab.arface.models.UserData
-import no.realitylab.arface.viewmodels.UserViewModel
+import no.realitylab.arface.presentation.activities.GlassesActivity
+import no.realitylab.arface.utilities.callbacks.ActivityCallback
+import no.realitylab.arface.data.models.UserData
+import no.realitylab.arface.presentation.viewmodels.UserViewModel
 
 
 class HomeFragment : Fragment() {
@@ -39,7 +38,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val userObserver = Observer<UserData> {userData ->
+        val userObserver = Observer<UserData> { userData ->
             userId = userData.userId?: ""
             Picasso.get().load(userData.profilePictureUrl).into(profileImage)
             userName.text = userData.userName

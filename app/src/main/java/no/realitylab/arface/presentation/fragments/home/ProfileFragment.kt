@@ -1,4 +1,4 @@
-package no.realitylab.arface.fragments.home
+package no.realitylab.arface.presentation.fragments.home
 
 import android.content.Context
 import android.os.Bundle
@@ -14,11 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_home.image_view
 import no.realitylab.arface.R
-import no.realitylab.arface.models.UserData
-import no.realitylab.arface.viewmodels.UserViewModel
-import org.w3c.dom.Text
+import no.realitylab.arface.data.models.UserData
+import no.realitylab.arface.presentation.viewmodels.UserViewModel
 
 
 class ProfileFragment : Fragment() {

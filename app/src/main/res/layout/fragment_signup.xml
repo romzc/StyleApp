@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorActivityBackground"
-    tools:context=".fragments.main.SignupFragment">
+    tools:context=".presentation.fragments.main.SignupFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

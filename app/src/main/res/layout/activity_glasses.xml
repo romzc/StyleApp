@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ar_activities.GlassesActivity">
+    tools:context=".presentation.activities.GlassesActivity">
 
     <fragment android:name="no.realitylab.arface.utilities.FaceArFragment"
         android:id="@+id/face_fragment"

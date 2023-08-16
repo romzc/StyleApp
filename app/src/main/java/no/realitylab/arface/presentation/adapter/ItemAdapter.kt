@@ -1,14 +1,10 @@
-package no.realitylab.arface.adapter
+package no.realitylab.arface.presentation.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import no.realitylab.arface.R
-import no.realitylab.arface.ar_activities.GlassesActivity
-import no.realitylab.arface.models.ItemModel
-import no.realitylab.arface.models.Photo
+import no.realitylab.arface.data.models.Photo
 
 class ItemAdapter(
     private var modelsList : List<Photo> = emptyList()

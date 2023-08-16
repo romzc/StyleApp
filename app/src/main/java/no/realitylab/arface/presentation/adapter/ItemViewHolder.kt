@@ -1,12 +1,11 @@
-package no.realitylab.arface.adapter
+package no.realitylab.arface.presentation.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
 import no.realitylab.arface.R
-import no.realitylab.arface.models.ItemModel
-import no.realitylab.arface.models.Photo
+import no.realitylab.arface.data.models.Photo
 
 class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
 

@@ -1,4 +1,4 @@
-package no.realitylab.arface.fragments.main
+package no.realitylab.arface.presentation.fragments.main
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -33,9 +32,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
 import no.realitylab.arface.R
-import no.realitylab.arface.activities.HomeActivity
-import no.realitylab.arface.callbacks.ActivityCallback
-import no.realitylab.arface.models.UserData
+import no.realitylab.arface.presentation.activities.HomeActivity
+import no.realitylab.arface.utilities.callbacks.ActivityCallback
 import java.io.ByteArrayOutputStream
 
 const val REQUEST_CODE_SIGN_IN = 0
@@ -72,7 +70,7 @@ class LoginFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            if ( context is ActivityCallback ) {
+            if ( context is ActivityCallback) {
                 callback = context
             }
         }

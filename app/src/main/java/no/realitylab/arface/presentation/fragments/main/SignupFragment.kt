@@ -1,4 +1,4 @@
-package no.realitylab.arface.fragments.main
+package no.realitylab.arface.presentation.fragments.main
 
 import android.content.Context
 import android.content.Intent
@@ -20,8 +20,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import no.realitylab.arface.R
-import no.realitylab.arface.activities.HomeActivity
-import no.realitylab.arface.callbacks.ActivityCallback
+import no.realitylab.arface.presentation.activities.HomeActivity
+import no.realitylab.arface.utilities.callbacks.ActivityCallback
 import java.io.ByteArrayOutputStream
 import java.util.Objects
 import kotlin.Exception

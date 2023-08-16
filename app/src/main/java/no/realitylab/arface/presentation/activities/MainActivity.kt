@@ -1,25 +1,17 @@
-package no.realitylab.arface
+package no.realitylab.arface.presentation.activities
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_main.mainLayout
-import no.realitylab.arface.activities.HomeActivity
-import no.realitylab.arface.callbacks.ActivityCallback
-import no.realitylab.arface.fragments.main.LoginFragment
-import no.realitylab.arface.fragments.main.SignupFragment
+import no.realitylab.arface.R
+import no.realitylab.arface.utilities.callbacks.ActivityCallback
+import no.realitylab.arface.presentation.fragments.main.LoginFragment
+import no.realitylab.arface.presentation.fragments.main.SignupFragment
 
 
 const val REQUEST_CODE_SIGN_IN = 0
