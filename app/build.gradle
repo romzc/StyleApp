@@ -1,8 +1,11 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.ar.sceneform.plugin'
+    id 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 29
@@ -24,10 +27,14 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro')
         }
     }
 }
@@ -82,18 +89,7 @@ dependencies {
 
     // roundend images
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
 }
 
-apply plugin: 'com.google.ar.sceneform.plugin'
-apply plugin: 'com.google.gms.google-services'
-
-sceneform.asset('sampledata/sunglasses.fbx',
-        'default',
-        'sampledata/sunglasses.sfa',
-        'src/main/assets/sunglasses')
-
-sceneform.asset('sampledata/yellow_sunglasses.fbx',
-        'default',
-        'sampledata/yellow_sunglasses.sfa',
-        'src/main/assets/yellow_sunglasses')
+sceneform.asset('sampledata/sunglasses.fbx', 'default', 'sampledata/sunglasses.sfa', 'src/main/assets/sunglasses')
+sceneform.asset('sampledata/yellow_sunglasses.fbx', 'default', 'sampledata/yellow_sunglasses.sfa', 'src/main/assets/yellow_sunglasses')
