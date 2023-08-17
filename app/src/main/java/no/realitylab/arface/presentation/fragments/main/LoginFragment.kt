@@ -32,12 +32,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
 import no.realitylab.arface.R
+import no.realitylab.arface.databinding.FragmentLoginBinding
 import no.realitylab.arface.presentation.activities.HomeActivity
 import no.realitylab.arface.utilities.callbacks.ActivityCallback
 import java.io.ByteArrayOutputStream
 
 const val REQUEST_CODE_SIGN_IN = 0
 class LoginFragment : Fragment() {
+
+    private lateinit var binding : FragmentLoginBinding
 
     private lateinit var inflate: View
     private lateinit var tvEmail: TextView
@@ -46,10 +49,8 @@ class LoginFragment : Fragment() {
     private lateinit var btnLogIn: Button
     private lateinit var btnRegister: TextView
     private lateinit var callback: ActivityCallback
-
     private lateinit var auth : FirebaseAuth
     private lateinit var fireDatabase: DatabaseReference
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
